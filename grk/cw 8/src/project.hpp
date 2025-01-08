@@ -56,6 +56,7 @@ glm::vec3 lightColor = glm::vec3(0.9, 0.7, 0.8)*100;
 glm::vec3 spotlightPos = glm::vec3(0, 0, 0);
 glm::vec3 spotlightConeDir = glm::vec3(0, 0, 0);
 glm::vec3 spotlightColor = glm::vec3(0.5, 0.9, 0.8)*10;
+
 float spotlightPhi = 3.14 / 3;
 
 
@@ -132,20 +133,21 @@ void DrawObjectWithTextureFromStruct(ModelWithTexture model)
 	glUniformMatrix4fv(glGetUniformLocation(ShaderInUseForTextures, "transformation"), 1, GL_FALSE, (float*)&transformation);
 	glUniformMatrix4fv(glGetUniformLocation(ShaderInUseForTextures, "modelMatrix"), 1, GL_FALSE, (float*)&modelMatrix);
 	glUniform3f(glGetUniformLocation(ShaderInUseForTextures, "lightPos"), 0, 100, 0);
+	glUniform3f(glGetUniformLocation(programTex, "cameraPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 
 	Core::SetActiveTexture(model.TexturesIDs[0], "baseTexture", ShaderInUseForTextures, 0);
-	if (model.TextureVertexSize==2)
-	{
-		Core::SetActiveTexture(model.TexturesIDs[1], "normalTexture", ShaderInUseForTextures, 1);
-	}
-	else if (model.TextureVertexSize == 3)
-	{
-		Core::SetActiveTexture(model.TexturesIDs[2], "metalicTexture", ShaderInUseForTextures, 2);
-	}
-	else if (model.TextureVertexSize == 4)
-	{
-		Core::SetActiveTexture(model.TexturesIDs[3], "otherTexture", ShaderInUseForTextures, 3);
-	}
+	//if (model.TextureVertexSize==2)
+	//{
+	//	Core::SetActiveTexture(model.TexturesIDs[1], "normalTexture", ShaderInUseForTextures, 1);
+	//}
+	//else if (model.TextureVertexSize == 3)
+	//{
+	//	Core::SetActiveTexture(model.TexturesIDs[2], "metalicTexture", ShaderInUseForTextures, 2);
+	//}
+	//else if (model.TextureVertexSize == 4)
+	//{
+	//	Core::SetActiveTexture(model.TexturesIDs[3], "otherTexture", ShaderInUseForTextures, 3);
+	//}
 	Core::DrawContext(model.Context);
 
 }
@@ -155,7 +157,8 @@ void drawObjectTexture(Core::RenderContext& context, glm::mat4 modelMatrix, GLui
 	glm::mat4 transformation = viewProjectionMatrix * modelMatrix;
 	glUniformMatrix4fv(glGetUniformLocation(programTex, "transformation"), 1, GL_FALSE, (float*)&transformation);
 	glUniformMatrix4fv(glGetUniformLocation(programTex, "modelMatrix"), 1, GL_FALSE, (float*)&modelMatrix);
-	glUniform3f(glGetUniformLocation(programTex, "lightPos"), 0, 0, 0);
+	glUniform3f(glGetUniformLocation(programTex, "lightPos"), 0, 100, 0);
+	glUniform3f(glGetUniformLocation(programTex, "cameraPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 
 	Core::SetActiveTexture(textureID, "baseTexture", programTex, 0);
 	Core::DrawContext(context);
@@ -166,17 +169,17 @@ void drawObjectColor(Core::RenderContext& context, glm::mat4 modelMatrix, glm::v
 	
 	glm::mat4 viewProjectionMatrix = createPerspectiveMatrix() * createCameraMatrix();
 	glm::mat4 transformation = viewProjectionMatrix * modelMatrix;
-	glUniformMatrix4fv(glGetUniformLocation(program, "transformation"), 1, GL_FALSE, (float*)&transformation);
-	glUniformMatrix4fv(glGetUniformLocation(program, "modelMatrix"), 1, GL_FALSE, (float*)&modelMatrix);
+	glUniformMatrix4fv(glGetUniformLocation(programTex, "transformation"), 1, GL_FALSE, (float*)&transformation);
+	glUniformMatrix4fv(glGetUniformLocation(programTex, "modelMatrix"), 1, GL_FALSE, (float*)&modelMatrix);
 
-	glUniform1f(glGetUniformLocation(program, "exposition"), exposition);
+	glUniform1f(glGetUniformLocation(programTex, "exposition"), exposition);
 
-	glUniform3f(glGetUniformLocation(program, "color"), color.x, color.y, color.z);
+	glUniform3f(glGetUniformLocation(programTex, "color"), color.x, color.y, color.z);
 
-	glUniform3f(glGetUniformLocation(program, "cameraPos"), cameraPos.x, cameraPos.y, cameraPos.z);
+	glUniform3f(glGetUniformLocation(programTex, "cameraPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 
-	glUniform3f(glGetUniformLocation(program, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
-	glUniform3f(glGetUniformLocation(program, "lightColor"), lightColor.x, lightColor.y, lightColor.z);
+	glUniform3f(glGetUniformLocation(programTex, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	glUniform3f(glGetUniformLocation(programTex, "lightColor"), lightColor.x, lightColor.y, lightColor.z);
 
 	/*glUniform3f(glGetUniformLocation(program, "spotlightConeDir"), spotlightConeDir.x, spotlightConeDir.y, spotlightConeDir.z);
 	glUniform3f(glGetUniformLocation(program, "spotlightPos"), spotlightPos.x, spotlightPos.y, spotlightPos.z);
