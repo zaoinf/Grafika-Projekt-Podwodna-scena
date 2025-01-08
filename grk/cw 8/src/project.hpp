@@ -112,8 +112,11 @@ glm::mat4 createPerspectiveMatrix()
 float lastTime = -1.f;
 float deltaTime = 0.f;
 
-void updateDeltaTime(float time) {
-	if (lastTime < 0) {
+void updateDeltaTime(float time) 
+{
+	glUniform1f(glGetUniformLocation(programTex, "time"), time);
+	if (lastTime < 0) 
+	{
 		lastTime = time;
 		return;
 	}
@@ -203,13 +206,15 @@ void renderScene(GLFWwindow* window)
 	glClearColor(0.4f, 0.4f, 0.8f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glm::mat4 transformation;
+
+	glUseProgram(programTex);
+	
 	float time = glfwGetTime();
 	updateDeltaTime(time);
 
 
 
-	glUseProgram(program);
-	
+
 	glm::vec3 spaceshipSide = glm::normalize(glm::cross(spaceshipDir, glm::vec3(0.f, 1.f, 0.f)));
 	glm::vec3 spaceshipUp = glm::normalize(glm::cross(spaceshipSide, spaceshipDir));
 	glm::mat4 specshipCameraRotrationMatrix = glm::mat4({spaceshipSide.x,spaceshipSide.y,spaceshipSide.z,0,spaceshipUp.x,spaceshipUp.y,spaceshipUp.z ,0,-spaceshipDir.x,-spaceshipDir.y,-spaceshipDir.z,0,0.,0.,0.,1.,});
@@ -270,9 +275,8 @@ void init(GLFWwindow* window)
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	glEnable(GL_DEPTH_TEST);
-	program = shaderLoader.CreateProgram("shaders/main_shader.vert", "shaders/main_shader.frag");
 	programSun = shaderLoader.CreateProgram("shaders/sun.vert", "shaders/sun.frag");
-	programTex = shaderLoader.CreateProgram("shaders/texture.vert", "shaders/texture.frag");
+	programTex = shaderLoader.CreateProgram("shaders/main_shader.vert", "shaders/main_shader.frag");
 
 
 	loadModelToContext("./models/spaceship.obj", shipContext);
@@ -302,7 +306,6 @@ void init(GLFWwindow* window)
 void shutdown(GLFWwindow* window)
 {
 	shaderLoader.DeleteProgram(programTex);
-	shaderLoader.DeleteProgram(program);
 }
 
 //obsluga wejscia przyciski na klawiaturze it takie tam

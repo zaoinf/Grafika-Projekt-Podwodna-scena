@@ -103,11 +103,5 @@
     <None Include="shaders\main_shader.vert">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="shaders\texture.frag">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="shaders\texture.vert">
-      <Filter>Shader Files</Filter>
-    </None>
   </ItemGroup>
 </Project>

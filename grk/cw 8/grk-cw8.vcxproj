@@ -41,8 +41,6 @@
     <None Include="shaders\main_shader.vert" />
     <None Include="shaders\sun.frag" />
     <None Include="shaders\sun.vert" />
-    <None Include="shaders\texture.frag" />
-    <None Include="shaders\texture.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6D813233-7D21-4888-944E-8E3CCAC3EFD3}</ProjectGuid>
