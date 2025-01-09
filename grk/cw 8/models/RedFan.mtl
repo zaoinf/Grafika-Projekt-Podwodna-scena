@@ -1,62 +1,12 @@
 # Blender 4.3.2 MTL File: 'None'
 # www.blender.org
 
-newmtl Branch1
-Ns 2.000000
+newmtl Material.005
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
-Ks 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
-illum 1
-map_Kd RS04_Annella_mollis_Giant_Sea_Fan_OBJ/RS04bra1.tif
-
-newmtl Branch1.001
-Ns 2.000000
-Ka 1.000000 1.000000 1.000000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 1
-map_Kd RS04_Annella_mollis_Giant_Sea_Fan_OBJ/RS04bra1.tif
-
-newmtl Branch1.002
-Ns 2.000000
-Ka 1.000000 1.000000 1.000000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 1
-map_Kd RS04_Annella_mollis_Giant_Sea_Fan_OBJ/RS04bra1.tif
-
-newmtl Branch2
-Ns 2.000000
-Ka 1.000000 1.000000 1.000000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 1
-map_Kd RS04_Annella_mollis_Giant_Sea_Fan_OBJ/RS04bra2.tif
-
-newmtl Branch2.001
-Ns 2.000000
-Ka 1.000000 1.000000 1.000000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 1
-map_Kd RS04_Annella_mollis_Giant_Sea_Fan_OBJ/RS04bra2.tif
-
-newmtl Branch2.002
-Ns 2.000000
-Ka 1.000000 1.000000 1.000000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 1
-map_Kd RS04_Annella_mollis_Giant_Sea_Fan_OBJ/RS04bra2.tif
+illum 2
+map_Kd C:/Users/erazer/Desktop/Project Grafika/grk/cw 8/img/RedFanTexture.png

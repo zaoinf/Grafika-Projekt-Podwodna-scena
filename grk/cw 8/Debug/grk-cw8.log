@@ -24,13 +24,13 @@ C:\Users\erazer\Desktop\Project Grafika\grk\cw 8\src\project.hpp(226,151): warni
 C:\Users\erazer\Desktop\Project Grafika\grk\cw 8\src\project.hpp(226,151): warning C4305:         ]
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\erazer\Desktop\Project Grafika\grk\cw 8\src\project.hpp(271,50): warning C4267: "=": konwersja z "size_t" do "unsigned short", możliwa utrata danych
+C:\Users\erazer\Desktop\Project Grafika\grk\cw 8\src\project.hpp(268,50): warning C4267: "=": konwersja z "size_t" do "unsigned short", możliwa utrata danych
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\erazer\Desktop\Project Grafika\grk\cw 8\src\project.hpp(357,17): warning C4305: "-=": obcięcie z "double" do "float"
+C:\Users\erazer\Desktop\Project Grafika\grk\cw 8\src\project.hpp(360,17): warning C4305: "-=": obcięcie z "double" do "float"
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\erazer\Desktop\Project Grafika\grk\cw 8\src\project.hpp(359,17): warning C4305: "+=": obcięcie z "double" do "float"
+C:\Users\erazer\Desktop\Project Grafika\grk\cw 8\src\project.hpp(362,17): warning C4305: "+=": obcięcie z "double" do "float"
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
 Box.obj : warning LNK4075: zignorowano opcję „/EDITANDCONTINUE” z powodu określenia opcji „/INCREMENTAL:NO”

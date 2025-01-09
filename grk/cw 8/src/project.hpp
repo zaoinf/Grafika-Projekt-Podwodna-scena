@@ -254,11 +254,8 @@ void loadModelToContext(std::string path, Core::RenderContext& context)
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
 		return;
 	}
-	//context.initFromAssimpMesh(scene->mMeshes[0]);
-	for (unsigned int i = 0; i < scene->mNumMeshes; ++i) 
-	{
-		context.initFromAssimpMesh(scene->mMeshes[i]);
-	}
+	context.initFromAssimpMesh(scene->mMeshes[0]);
+
 }
 void AddModelWithTextureToVectorOfModels( std::string PathToTheModel, std::initializer_list <const char*> PathsToTheTextures, const char* ShaderVariableName, glm::vec3 PositionOfTheModel, glm::vec3 Scaling = glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3 Rotation = glm::vec3(0.0f, 0.0f, 0.0f), GLuint program=programTex)
 {
@@ -294,10 +291,15 @@ void init(GLFWwindow* window)
 	AddModelWithTextureToVectorOfModels( "./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "Corrner_rock", glm::vec3(25.0f, 0.0f, 25.0f));
 	AddModelWithTextureToVectorOfModels(  "./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "Corrner_rock1", glm::vec3(-25.0f, 0.0f, 25.0f));
 	AddModelWithTextureToVectorOfModels(  "./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "rock_medium", glm::vec3(-15.0f, 0.0f, -15.0f), glm::vec3(0.1f), glm::vec3(0.0f, 0.5f, 0.0f));
-	
 	AddModelWithTextureToVectorOfModels("./models/shell1.obj", { "./img/shell1.jpg" }, "shell1", glm::vec3(2.0f, 0.6f, 2.0f), glm::vec3(0.5f));
-	
 	AddModelWithTextureToVectorOfModels("./models/shell.obj", { "./img/shell.png" }, "shell", glm::vec3(-2.0f, 0.2f, -2.0f), glm::vec3(0.02f));
+	AddModelWithTextureToVectorOfModels("./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "rock_medium2", glm::vec3(-15.0f, 0.0f, -15.0f), glm::vec3(0.1f), glm::vec3(0.0f, 0.5f, 0.0f));
+	AddModelWithTextureToVectorOfModels("./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "rock_medium3", glm::vec3(15.0f, 1.0f, -15.0f), glm::vec3(0.1f), glm::vec3(0.0f, 0.7f, 0.0f));
+	AddModelWithTextureToVectorOfModels("./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "rock_medium4", glm::vec3(10.0f, 1.0f, 10.0f), glm::vec3(0.1f), glm::vec3(0.5f, 6.5f, 0.5f));
+	AddModelWithTextureToVectorOfModels("./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "rock_medium5", glm::vec3(7.0f, 0.0f, -20.0f), glm::vec3(0.1f), glm::vec3(0.0f, 0.5f, 0.0f));
+	// niewim dlaczego jest czarny a nie czerwony ale narazie zostawie :(
+	AddModelWithTextureToVectorOfModels("./models/RedFan.obj", { "./img/RedFanTexture.png" }, "RedFan", glm::vec3(-4.0f, 0.2f, -4.0f), glm::vec3(0.1f));
+	
 
 	
 		
