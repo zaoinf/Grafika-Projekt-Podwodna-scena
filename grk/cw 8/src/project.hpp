@@ -67,8 +67,11 @@ struct ModelWithTexture
 	GLuint program;
 	Core::RenderContext Context;
 	glm::vec3 PositionOfTheModel;
+	glm::vec3 Scale = glm::vec3(1.0f, 1.0f, 1.0f); // Scalowanie Domyślne
+	glm::vec3 Rotation = glm::vec3(0.0f, 0.0f, 0.0f); // Rotacja domyślan
 	unsigned short TextureVertexSize = 1;
 };
+
 
 std::vector<ModelWithTexture>VectorOfModels;
 
@@ -128,7 +131,7 @@ void updateDeltaTime(float time)
 void DrawObjectWithTextureFromStruct(ModelWithTexture model) 
 {
 	GLuint ShaderInUseForTextures = model.program;
-	glm::mat4 modelMatrix = glm::translate(model.PositionOfTheModel);
+	glm::mat4 modelMatrix = glm::translate(model.PositionOfTheModel) *glm::rotate(model.Rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)) *glm::rotate(model.Rotation.y, glm::vec3(0.0f, 1.0f, 0.0f)) *glm::rotate(model.Rotation.z, glm::vec3(0.0f, 0.0f, 1.0f)) *glm::scale(model.Scale);
 	glUseProgram(ShaderInUseForTextures);
 	
 	glm::mat4 viewProjectionMatrix = createPerspectiveMatrix() * createCameraMatrix();
@@ -251,9 +254,13 @@ void loadModelToContext(std::string path, Core::RenderContext& context)
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
 		return;
 	}
-	context.initFromAssimpMesh(scene->mMeshes[0]);// przekazuje scene do inicjalizacji kontekstu
+	context.initFromAssimpMesh(scene->mMeshes[0]);
+	/*for (unsigned int i = 0; i < scene->mNumMeshes; ++i) 
+	{
+		context.initFromAssimpMesh(scene->mMeshes[i]);
+	}*/
 }
-void AddModelWithTextureToVectorOfModels(glm::vec3 PositionOfTheModel, std::string PathToTheModel, std::initializer_list <const char*> PathsToTheTextures, const char* ShaderVariableName, GLuint program)
+void AddModelWithTextureToVectorOfModels( std::string PathToTheModel, std::initializer_list <const char*> PathsToTheTextures, const char* ShaderVariableName, glm::vec3 PositionOfTheModel, glm::vec3 Scaling = glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3 Rotation = glm::vec3(0.0f, 0.0f, 0.0f), GLuint program=programTex)
 {
 	ModelWithTexture model;
 
@@ -265,7 +272,8 @@ void AddModelWithTextureToVectorOfModels(glm::vec3 PositionOfTheModel, std::stri
 	loadModelToContext(PathToTheModel, model.Context);
 	model.program = program;
 	model.PositionOfTheModel = PositionOfTheModel;
-
+	model.Scale = Scaling;
+	model.Rotation = Rotation;
 	VectorOfModels.push_back(model);
 }
 
@@ -280,12 +288,19 @@ void init(GLFWwindow* window)
 
 
 	loadModelToContext("./models/spaceship.obj", shipContext);
-
-	AddModelWithTextureToVectorOfModels(glm::vec3(0.0f, 0.0f, 0.0f), "./models/cube.obj", { "./img/Red_cube.png" }, "cube_Texture", programTex);
-	AddModelWithTextureToVectorOfModels(glm::vec3(0.0f, 0.0f, 0.0f), "./models/SeaFloor.obj", { "./img/SandSeaFloor2.png" }, "floor", programTex);
+	// Pozycja//scierzka do modelu//scierzka do tekstur/tekstury w{}//nazwaIDtekstury//nazwa shadera somyślnie programTex//Skalowanie domyslnie brak //Rotacja domyslnie brak
+	AddModelWithTextureToVectorOfModels( "./models/cube.obj", { "./img/Red_cube.png" }, "cube_Texture", glm::vec3(0.0f, 0.0f, 0.0f) );
+	AddModelWithTextureToVectorOfModels( "./models/SeaFloor.obj", { "./img/SandSeaFloor2.png" }, "floor",glm::vec3(0.0f, 0.0f, 0.0f));
+	AddModelWithTextureToVectorOfModels( "./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "Corrner_rock", glm::vec3(25.0f, 0.0f, 25.0f));
+	AddModelWithTextureToVectorOfModels(  "./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "Corrner_rock1", glm::vec3(-25.0f, 0.0f, 25.0f));
+	AddModelWithTextureToVectorOfModels(  "./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "rock_medium", glm::vec3(-15.0f, 0.0f, -15.0f), glm::vec3(0.1f), glm::vec3(0.0f, 0.5f, 0.0f));
+	
+	AddModelWithTextureToVectorOfModels("./models/shell1.obj", { "./img/shell1.jpg" }, "shell1", glm::vec3(2.0f, 0.6f, 2.0f), glm::vec3(0.5f));
+	
+	AddModelWithTextureToVectorOfModels("./models/shell.obj", { "./img/shell.png" }, "shell", glm::vec3(-2.0f, 0.2f, -2.0f), glm::vec3(0.02f));
 
 	
-	
+		
 	//AddModelWithTextureToVectorOfModels(glm::vec3(1.0f, 1.0f, 1.0f), "./models/sand_cube.obj", { "./img/sand3.jpeg" }, "cube_Texture2", programTex);
 	//AddModelWithTextureToVectorOfModels(glm::vec3(3.0f, 3.0f, 3.0f), "./models/SkeletonBody.obj", {"./img/SkeletonTextures/SkeletonBody_Base_Color.png","./img/SkeletonTextures/SkeletonBody_Normal_OpenGL.png" }, "SkeletonBody", programTex);
 	//AddModelWithTextureToVectorOfModels(glm::vec3(0.0f, -1.0f, 0.0f), "./models/experimental_floor.obj",{ "./img/textures/Ground_baseColor.jpeg","./img/textures/Ground_normal.jpeg" ,"./img/textures/Ground_metallicRoughness.jpeg" }, "floor", programTex);

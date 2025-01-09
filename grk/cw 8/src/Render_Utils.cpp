@@ -124,36 +124,3 @@ void Core::DrawContext(Core::RenderContext& context)
 	);
 	glBindVertexArray(0);
 }
-//void loadGLTFModelToContext(const std::string& path, Core::RenderContext& context) {
-//    Assimp::Importer importer;
-//    const aiScene* scene = importer.ReadFile(
-//        path,
-//        aiProcess_Triangulate |
-//        aiProcess_CalcTangentSpace |
-//        aiProcess_JoinIdenticalVertices |
-//        aiProcess_GenUVCoords
-//    );
-//
-//    if (!scene || !scene->mRootNode) {
-//        std::cerr << "Error loading GLTF: " << importer.GetErrorString() << std::endl;
-//        return;
-//    }
-//
-//    for (unsigned int i = 0; i < scene->mNumMeshes; ++i) {
-//        context.initFromAssimpMesh(scene->mMeshes[i], scene);
-//    }
-//}
-//void Core::RenderContext::initFromAssimpMeshGLTF(aiMesh* mesh, const aiScene* scene) {
-//    // Load vertices, normals, and texture coordinates (as in the original code)
-//    // Load material and texture
-//    if (mesh->mMaterialIndex >= 0) {
-//        aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-//        aiString texturePath;
-//
-//        if (material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath) == AI_SUCCESS) {
-//            std::string fullPath = texturePath.C_Str();
-//            GLuint textureID = Core::LoadTexture(fullPath.c_str());
-//            // Store the texture ID for rendering
-//        }
-//    }
-//}
