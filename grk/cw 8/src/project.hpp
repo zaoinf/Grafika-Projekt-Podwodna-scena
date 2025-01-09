@@ -254,11 +254,11 @@ void loadModelToContext(std::string path, Core::RenderContext& context)
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
 		return;
 	}
-	context.initFromAssimpMesh(scene->mMeshes[0]);
-	/*for (unsigned int i = 0; i < scene->mNumMeshes; ++i) 
+	//context.initFromAssimpMesh(scene->mMeshes[0]);
+	for (unsigned int i = 0; i < scene->mNumMeshes; ++i) 
 	{
 		context.initFromAssimpMesh(scene->mMeshes[i]);
-	}*/
+	}
 }
 void AddModelWithTextureToVectorOfModels( std::string PathToTheModel, std::initializer_list <const char*> PathsToTheTextures, const char* ShaderVariableName, glm::vec3 PositionOfTheModel, glm::vec3 Scaling = glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3 Rotation = glm::vec3(0.0f, 0.0f, 0.0f), GLuint program=programTex)
 {
@@ -288,7 +288,7 @@ void init(GLFWwindow* window)
 
 
 	loadModelToContext("./models/spaceship.obj", shipContext);
-	// Pozycja//scierzka do modelu//scierzka do tekstur/tekstury w{}//nazwaIDtekstury//nazwa shadera somyślnie programTex//Skalowanie domyslnie brak //Rotacja domyslnie brak
+	//scierzka do modelu//scierzka do tekstur/tekstury w{}//nazwaIDtekstury//nazwa shadera somyślnie programTex// Pozycja//Skalowanie domyslnie brak //Rotacja domyslnie brak
 	AddModelWithTextureToVectorOfModels( "./models/cube.obj", { "./img/Red_cube.png" }, "cube_Texture", glm::vec3(0.0f, 0.0f, 0.0f) );
 	AddModelWithTextureToVectorOfModels( "./models/SeaFloor.obj", { "./img/SandSeaFloor2.png" }, "floor",glm::vec3(0.0f, 0.0f, 0.0f));
 	AddModelWithTextureToVectorOfModels( "./models/Rock_1.obj", { "./img/Rock_1Texture/Rock_1_Base_Color.jpg" }, "Corrner_rock", glm::vec3(25.0f, 0.0f, 25.0f));
